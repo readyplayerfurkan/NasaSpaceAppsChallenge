@@ -7,6 +7,8 @@ public class SceneController : MonoBehaviour
 {
     [SerializeField] private RectTransform currentPanel;
     [SerializeField] private List<RectTransform> panels;
+    [SerializeField] private Vector3 endValue;
+    [SerializeField] private float doDurationTime;
 
     private void Start()
     {
@@ -15,8 +17,9 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator LoadingSquance()
     {
-        yield return new WaitForSeconds(5f);
-        currentPanel.DOMoveY(1000, 5f);
+        yield return new WaitForSeconds(3f);
+        //   currentPanel.DOMoveY(1000, 5f);
+        currentPanel.DOMove(endValue, doDurationTime);
         yield return new WaitForSeconds(5f);
         ChangeScene(panels[1]);
     }
