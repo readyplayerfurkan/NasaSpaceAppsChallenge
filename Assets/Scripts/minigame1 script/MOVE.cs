@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class JoystickMovement : MonoBehaviour
+public class MOVE : MonoBehaviour
 {
+    [SerializeField] private TMP_Text scoreText;
     [SerializeField] private float moveSpeed = 5f; // Hareket hýzý
     [SerializeField] private Joystick joystick;   // Unity'deki Joystick bileþeni referansý
     [SerializeField] private TMP_Text timerText;  // Zamanlayýcý UI bileþeni
+    public static int score;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -26,13 +29,25 @@ public class JoystickMovement : MonoBehaviour
         {
             // Zamanlayýcýyý güncelle
             timer -= Time.deltaTime;
-            timerText.text = "Time: " + FormatTime(timer); // Formatlanmýþ zamaný güncelle
-
-            // Joystick giriþini al
-            movement.x = joystick.Horizontal;
-            movement.y = joystick.Vertical;
+            if (timer < 0)
+            {
+                timer = 0;
+            }
+            timerText.text = "Time: " + FormatTime(timer);
         }
+        else
+        {
+            // Game Over logic
+            SceneManager.LoadScene("GameOver1");
+        }
+
+        scoreText.text = "Score: " + score.ToString();
+
+        movement.x = joystick.Horizontal;
+        movement.y = joystick.Vertical;
     }
+
+
 
     private void FixedUpdate()
     {
@@ -46,5 +61,22 @@ public class JoystickMovement : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60f);
         int seconds = Mathf.FloorToInt(time % 60f);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "yildiz")
+        {
+            score += 10;
+        }
+        if (collision.gameObject.tag == "artý")
+        {
+            score ++;
+        }
+        if (collision.gameObject.tag == "eksi")
+        {
+            score-=5;
+        }
+
+
     }
 }
