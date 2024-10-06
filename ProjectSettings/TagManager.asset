@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - icerik
-  - trash
+  - Goal
+  - Growing
+  - Growing'
   layers:
   - Default
   - TransparentFX
