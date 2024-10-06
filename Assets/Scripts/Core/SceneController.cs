@@ -15,6 +15,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] private float doDurationTime;
     [SerializeField] private AudioClip startSpeech;
     [SerializeField] private AudioClip emotionPanelSpeech;
+    [SerializeField] private AudioClip boredPanelSpeech;
     [SerializeField] private GameObject animator;
 
     private void Start()
@@ -43,5 +44,11 @@ public class SceneController : MonoBehaviour
     {
         ChangeScene(panels[2]);
         SoundController.Instance.PlaySound(emotionPanelSpeech);
+    }
+
+    public void OnClickBored()
+    {
+        ChangeScene(panels[3]);
+        SoundController.Instance.PlaySound(boredPanelSpeech);
     }
 }
