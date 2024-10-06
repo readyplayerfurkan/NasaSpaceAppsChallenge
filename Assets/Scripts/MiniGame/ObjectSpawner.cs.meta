@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Click.cs.meta
+guid: 89166c28fdd9fe545b956155f630910a
+========
+guid: a37d705c8e9115e439ec799186182634
+>>>>>>>> 5740a288c2a8cc5fda7e2962107da13cfdcbd328:Assets/Scripts/MiniGame/ObjectSpawner.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

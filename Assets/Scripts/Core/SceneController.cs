@@ -1,7 +1,9 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class SceneController : MonoBehaviour
     [SerializeField] private List<RectTransform> panels;
     [SerializeField] private Vector3 endValue;
     [SerializeField] private float doDurationTime;
+    [SerializeField] private AudioClip startSpeech;
+    [SerializeField] private GameObject animator;
 
     private void Start()
     {
@@ -17,17 +21,18 @@ public class SceneController : MonoBehaviour
 
     private IEnumerator LoadingSquance()
     {
-        yield return new WaitForSeconds(3f);
-        //   currentPanel.DOMoveY(1000, 5f);
-        currentPanel.DOMove(endValue, doDurationTime);
         yield return new WaitForSeconds(5f);
         ChangeScene(panels[1]);
+        yield return new WaitForSeconds(1f);
+        SoundController.Instance.PlaySound(startSpeech);
     }
 
     public void ChangeScene(RectTransform targetPanel)
     {
         currentPanel.gameObject.SetActive(false);
+        animator.SetActive(false);
         currentPanel = targetPanel;
         currentPanel.gameObject.SetActive(true);
+        currentPanel.DOMoveY(Screen.height / 2, 5f);
     }
 }
