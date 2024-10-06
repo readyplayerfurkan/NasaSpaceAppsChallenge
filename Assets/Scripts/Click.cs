@@ -6,7 +6,12 @@ using UnityEngine;
 public class Click : MonoBehaviour
 {
     [SerializeField] private GameEvent onCircleClicked;
+    public float lifeTime;
 
+    void Update()
+    {
+        Destroy(gameObject,lifeTime);
+    }
     void OnMouseDown()
     {
        onCircleClicked.Raise();
