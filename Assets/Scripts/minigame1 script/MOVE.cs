@@ -11,7 +11,8 @@ public class MOVE : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f; // Hareket hýzý
     [SerializeField] private Joystick joystick;   // Unity'deki Joystick bileþeni referansý
     [SerializeField] private TMP_Text timerText;  // Zamanlayýcý UI bileþeni
-    public static int score;
+
+    public static int score = 0; // score public ve static olmalý
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -43,11 +44,17 @@ public class MOVE : MonoBehaviour
 
         scoreText.text = "Score: " + score.ToString();
 
+        // Joystick yönlerini almak
         movement.x = joystick.Horizontal;
         movement.y = joystick.Vertical;
+
+        // Karakterin rotasyonunu joystick yönüne göre ayarla
+        if (movement != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg; // Açý hesapla
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f)); // Rotasyonu uygula
+        }
     }
-
-
 
     private void FixedUpdate()
     {
@@ -62,6 +69,7 @@ public class MOVE : MonoBehaviour
         int seconds = Mathf.FloorToInt(time % 60f);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "yildiz")
@@ -70,13 +78,11 @@ public class MOVE : MonoBehaviour
         }
         if (collision.gameObject.tag == "artý")
         {
-            score ++;
+            score++;
         }
         if (collision.gameObject.tag == "eksi")
         {
-            score-=5;
+            score -= 5;
         }
-
-
     }
 }

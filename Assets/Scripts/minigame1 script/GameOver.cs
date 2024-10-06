@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GameOver : MonoBehaviour
+public class Over : MonoBehaviour
 {
     [SerializeField] TMP_Text scoreDisplayText;
-    private void Start()
+
+    private void start()
     {
+        if (scoreDisplayText == null)
+        {
+            Debug.LogError("Score Display Text is not assigned!");
+            return;
+        }
+
         ScoreDisplay();
     }
+
+
     private void ScoreDisplay()
     {
-        scoreDisplayText.text = "Your Score :" + MOVE.score;
+        // MOVE sýnýfýndaki score deðiþkeninin güncel deðerini gösteriyoruz.
+        scoreDisplayText.text = "Your Score : " + MOVE.score;
     }
 }
