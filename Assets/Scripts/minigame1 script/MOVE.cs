@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class JoystickMovement : MonoBehaviour
+public class MOVE : MonoBehaviour
 {
+    [SerializeField] private TMP_Text scoreText;
     [SerializeField] private float moveSpeed = 5f; // Hareket hýzý
     [SerializeField] private Joystick joystick;   // Unity'deki Joystick bileþeni referansý
     [SerializeField] private TMP_Text timerText;  // Zamanlayýcý UI bileþeni
+
+    public static int score = 0; // score public ve static olmalý
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -26,11 +30,29 @@ public class JoystickMovement : MonoBehaviour
         {
             // Zamanlayýcýyý güncelle
             timer -= Time.deltaTime;
-            timerText.text = "Time: " + FormatTime(timer); // Formatlanmýþ zamaný güncelle
+            if (timer < 0)
+            {
+                timer = 0;
+            }
+            timerText.text = "Time: " + FormatTime(timer);
+        }
+        else
+        {
+            // Game Over logic
+            SceneManager.LoadScene("GameOver1");
+        }
 
-            // Joystick giriþini al
-            movement.x = joystick.Horizontal;
-            movement.y = joystick.Vertical;
+        scoreText.text = "Score: " + score.ToString();
+
+        // Joystick yönlerini almak
+        movement.x = joystick.Horizontal;
+        movement.y = joystick.Vertical;
+
+        // Karakterin rotasyonunu joystick yönüne göre ayarla
+        if (movement != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg; // Açý hesapla
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f)); // Rotasyonu uygula
         }
     }
 
@@ -46,5 +68,21 @@ public class JoystickMovement : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60f);
         int seconds = Mathf.FloorToInt(time % 60f);
         return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "yildiz")
+        {
+            score += 10;
+        }
+        if (collision.gameObject.tag == "artý")
+        {
+            score++;
+        }
+        if (collision.gameObject.tag == "eksi")
+        {
+            score -= 5;
+        }
     }
 }

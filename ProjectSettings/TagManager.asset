@@ -7,8 +7,11 @@ TagManager:
   - Goal
   - Growing
   - Growing'
-  - target
   - icerik
+  - yildiz
+  - eksi
+  - "art\u0131"
+  - uzum
   layers:
   - Default
   - TransparentFX
