@@ -7,6 +7,8 @@ TagManager:
   - Goal
   - Growing
   - Growing'
+  - target
+  - icerik
   layers:
   - Default
   - TransparentFX
