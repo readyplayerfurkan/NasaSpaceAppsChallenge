@@ -76,4 +76,14 @@ public class Randomization : MonoBehaviour
     {
         gameOverText.SetActive(true); // Activate the Game Over text
     }
+
+    public void Restart()
+    {
+        gameOverText.SetActive(false);
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        remainingTime = activeTime; // Initialize remaining time
+        StartCoroutine(SpawnInitialObjectsWithDelay());
+        StartCoroutine(SpawnNewObjects());
+        StartCoroutine(StopSpawningAfterTime());
+    }
 }

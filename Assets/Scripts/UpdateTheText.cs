@@ -5,6 +5,7 @@ public class UpdateTheText : MonoBehaviour
 {
     private int score;
     private TextMeshProUGUI scoreText;
+    public TextMeshProUGUI endScore;
 
     private void Start()
     {
@@ -12,7 +13,14 @@ public class UpdateTheText : MonoBehaviour
     }
     public void OnCircleClicked()
     {
-        score += 250;
+        score += 5;
         scoreText.text = "Score : " + score.ToString();
+        endScore.text = "Your Score: " + score.ToString();
+    }
+
+    public void RestartedScore()
+    {
+        score = 0;
+        scoreText.text = "Score: 0";
     }
 }
