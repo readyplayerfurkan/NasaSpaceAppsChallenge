@@ -12,6 +12,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] private Vector3 endValue;
     [SerializeField] private float doDurationTime;
     [SerializeField] private AudioClip startSpeech;
+    [SerializeField] private GameObject animator;
 
     private void Start()
     {
@@ -29,6 +30,7 @@ public class SceneController : MonoBehaviour
     public void ChangeScene(RectTransform targetPanel)
     {
         currentPanel.gameObject.SetActive(false);
+        animator.SetActive(false);
         currentPanel = targetPanel;
         currentPanel.gameObject.SetActive(true);
         currentPanel.DOMoveY(Screen.height / 2, 5f);
