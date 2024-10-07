@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
@@ -50,5 +51,20 @@ public class SceneController : MonoBehaviour
     {
         ChangeScene(panels[3]);
         SoundController.Instance.PlaySound(boredPanelSpeech);
+    }
+
+    public void OpenGameSelection()
+    {
+        ChangeScene(panels[4]);
+    }
+
+    public void OpenMazeGame()
+    {
+        SceneManager.LoadScene("Mini-Game-1");
+    }
+
+    public void OpenClickyGame()
+    {
+        SceneManager.LoadScene("Mini-Game-2");
     }
 }

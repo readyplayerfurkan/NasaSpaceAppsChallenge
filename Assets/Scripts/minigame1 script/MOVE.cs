@@ -16,7 +16,7 @@ public class MOVE : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 movement;
-    private float timer = 60f;  // Baþlangýç zamaný (örnek olarak 60 saniye)
+    private float timer = 15f;  // Baþlangýç zamaný (örnek olarak 60 saniye)
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class MOVE : MonoBehaviour
         else
         {
             // Game Over logic
-            SceneManager.LoadScene("GameOver1");
+            
         }
 
         scoreText.text = "Score: " + score.ToString();
